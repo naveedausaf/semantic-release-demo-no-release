@@ -1,0 +1,47 @@
+name: Release to Production
+concurrency: release-to-prod-pipeline
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-release:
+    # UNCOMMENT THE FOLLOWING LINE WHEN
+    # you have defined jobs named
+    # 'build' and 'test'
+    #
+    # SEMANTIC-RELEASE SHOULD ONLY RUN
+    # AFTER TESTS HAVE RUN SUCCESSFULLY
+    #
+    #needs: [build, test]
+
+    # This permissions block wasn't needed in
+    # earlier versions of semantic-release
+    # (I have a project currently using an
+    # earlier version and it works fine without
+    # a permissions block anywhere in the workflow)
+    # The issue is described here:
+    # https://github.com/semantic-release/semantic-release/issues/2481
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    name: Create Release
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout code
+        id: checkout
+        with:
+          submodules: true
+
+      - name: Create GitHub release
+        id: semanticrelease
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          npm ci
+          npm run release
+
+      # NEXT, THERE SHOULD AN ACTUAL DEPLOYMENT JOB
+      # (to deploy to NPM, or Vercel or AWS Amplify
+      # or Google Firebase or Azure Static Web Apps etc.)

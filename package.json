@@ -5,13 +5,18 @@
   "bin": "./cli.js",
   "type": "module",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "semantic-release"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
     "@commitlint/config-angular": "^19.5.0",
-    "husky": "^9.1.6"
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "husky": "^9.1.6",
+    "semantic-release": "^24.1.2"
   }
 }
