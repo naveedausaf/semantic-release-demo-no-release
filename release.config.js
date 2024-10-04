@@ -10,7 +10,7 @@ export default {
     [
       "@semantic-release/npm",
       {
-        npmPublish: false,
+        npmPublish: true,
       },
     ],
     [
